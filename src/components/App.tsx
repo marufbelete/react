@@ -1,10 +1,12 @@
+import MainPage from './pages/MainPage';
+import AuthPage from './pages/AuthPage';
 const App = () => {
     return (
         <div>
-            HELLO WORLD
+            <MainPage/>
+            <AuthPage/>
         </div>
     );
 };
-
 
 export default App;
