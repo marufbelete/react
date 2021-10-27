@@ -1,5 +1,6 @@
-import MainPage from './pages/MainPage';
-import AuthPage from './pages/AuthPage';
+import MainPage from './MainPage';
+import AuthPage from './AuthPage';
+
 const App = () => {
     return (
         <div>
