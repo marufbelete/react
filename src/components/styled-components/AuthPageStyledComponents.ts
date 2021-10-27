@@ -11,9 +11,8 @@ export const AuthPageLabel = styled.div`
 export const IntroText = styled.div`
     margin : 30px 50px;
     color : lightgray;
-    font-size : 22px;
+    font-size : 58px;
     text-align : center;
-    line-height : 35px;
 `;
 
 export const InputLabel = styled.label`
@@ -81,10 +80,31 @@ interface FormElementProps {
 
 export const FormElement = styled.form<FormElementProps>`
     width : 30%;
-    height : ${ props => props.isSignUp ? '500px' : '400px'};
+    height : ${ props => props.isSignUp ? '450px' : '300px'};
     display : flex;
     flex-direction : column;
     justify-content : space-between;
     align-items : center;
-    margin : 0 auto;
+    margin : 70px auto;
+`;
+
+export const SwitchTextOne = styled.span`
+    font-size : 22px;
+    color : white;
+    text-align : center;
+`;
+
+export const SwitchTextTwo = styled.span`
+    font-size : 22px;
+    color : #BC1BC5;
+    text-align : center;
+    margin-left : 10px;
+`;
+
+export const SwitchTextWrapper = styled.div`
+    width : 100%;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    cursor : pointer;
 `;

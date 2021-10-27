@@ -1,16 +1,15 @@
 import { AuthButton, FormElement } from '../styled-components/AuthPageStyledComponents';
 import Input from './Input';
 
-
 interface FormProps {
     isSignUp : boolean,
-    onSubmit : () => void
+    onSubmit : (e : React.FormEvent<HTMLFormElement>) => void
 }
 
 const Form = ( props : FormProps ) => {
 
     return (
-        <FormElement isSignUp = { false } onSubmit = { () => props.onSubmit }>
+        <FormElement isSignUp = { props.isSignUp } onSubmit = { props.onSubmit }>
             <Input 
                 labelText="Email*" 
                 placeholder = "Enter Your Email" 
@@ -35,7 +34,6 @@ const Form = ( props : FormProps ) => {
                 />  
             }
             
-
             <AuthButton>
                 { props.isSignUp ? "Sign Up" : "Sign In" }
             </AuthButton>
