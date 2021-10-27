@@ -75,13 +75,13 @@ export const AuthButton = styled.button`
 `;
 
 
-interface FormProps {
+interface FormElementProps {
     isSignUp : boolean
 }
 
-export const Form = styled.form<FormProps>`
+export const FormElement = styled.form<FormElementProps>`
     width : 30%;
-    height : ${ props => props.isSignUp ? '400px' : '300px'};
+    height : ${ props => props.isSignUp ? '500px' : '400px'};
     display : flex;
     flex-direction : column;
     justify-content : space-between;
