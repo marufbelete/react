@@ -1,12 +1,13 @@
 import MainPage from './MainPage';
 import AuthPage from './AuthPage';
+import { Fragment } from 'react';
 
 const App = () => {
     return (
-        <div>
+        <Fragment>
             <MainPage/>
             <AuthPage/>
-        </div>
+        </Fragment>
     );
 };
 

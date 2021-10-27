@@ -1,11 +1,10 @@
-import React from 'react'
-
+import { Fragment } from 'react'
 const AuthPage = () => {
     return (
-        <div>
-            I AM AN AUTH PAGE
-        </div>
-    )
+        <Fragment>
+           
+        </Fragment>
+    );
 };
 
 export default AuthPage;
