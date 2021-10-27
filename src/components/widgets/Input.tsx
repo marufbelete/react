@@ -5,6 +5,7 @@ interface InputProps {
     placeholder : string,
     type : string,
     error : string,
+    onInputChange : (value : string) => void
 }
 
 const Input = (props : InputProps) => {
@@ -15,6 +16,7 @@ const Input = (props : InputProps) => {
             <TextInput
                 type={ props.type }
                 placeholder = { props.placeholder }
+                onChange = { (e) => props.onInputChange(e.target.value)}
             />
             <TextInputError>{ props.error }</TextInputError>
         </InputComponentsWrapper>
