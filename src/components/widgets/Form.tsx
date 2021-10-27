@@ -11,7 +11,8 @@ export interface UserInputValues {
 
 interface FormProps {
     isSignUp : boolean,
-    onSubmit : (e : React.FormEvent<HTMLFormElement> , values : UserInputValues ) => void
+    onSubmit : (e : React.FormEvent<HTMLFormElement> , values : UserInputValues ) => void,
+    loading : boolean
 }
 
 const Form = ( props : FormProps ) => {
@@ -54,9 +55,15 @@ const Form = ( props : FormProps ) => {
                 />  
             }
             
-            <AuthButton>
-                { props.isSignUp ? "Sign Up" : "Sign In" }
-            </AuthButton>
+            {
+                props.loading ? <h1>I AM LOADING</h1> : 
+
+                <AuthButton>
+                    { props.isSignUp ? "Sign Up" : "Sign In" }
+                </AuthButton>
+            }
+
+            
 
 
         </FormElement>

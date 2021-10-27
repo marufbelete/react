@@ -5,33 +5,48 @@ import AuthPageHeader from '../widgets/AuthPageHeader';
 import SwitchText from '../widgets/SwitchText';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { actionCreators } from '../../store';
+import { useHistory } from 'react-router';
+import { authStateActionCreators, authActionCreators } from '../../store';
 
 
 const AuthPage = () => {
 
+    const history = useHistory();
     const dispatch = useDispatch();
-    const state = useSelector((state : any) => state.authPageState);
+    const authPageState = useSelector((state : any) => state.authPageState);
+    const { error, loading, auth } = useSelector((state : any) => state.auth);
+
 
     const onSubmit = (e : React.FormEvent<HTMLFormElement>, values : UserInputValues ) => {
         e.preventDefault();
-        console.log(values);
+
+        if(authPageState!.isSignUp){
+            dispatch(authActionCreators.signUp(values.email, values.password));
+
+            if(auth != null){
+                history.push('/private');
+            }
+        }
+        else {
+            console.log(values);
+        }
     }
 
     const handleAuthPageStateChange = () => {
-        dispatch(actionCreators.toggleAuthPageState());
+        dispatch(authStateActionCreators.toggleAuthPageState());
     }
 
     return (
         <Fragment>
-            <AuthPageHeader isSignUp = { state!.isSignUp }/>
+            <AuthPageHeader isSignUp = { authPageState!.isSignUp }/>
             <Form 
-                isSignUp= { state!.isSignUp } 
+                isSignUp= { authPageState!.isSignUp } 
                 onSubmit= { onSubmit }
+                loading = { loading }
             />
             <SwitchText 
                 onClick = { handleAuthPageStateChange } 
-                isSignUp = { state!.isSignUp }
+                isSignUp = { authPageState!.isSignUp }
             />
         </Fragment>
     );

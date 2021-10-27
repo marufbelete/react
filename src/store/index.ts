@@ -1,2 +1,3 @@
 export * from './store';
-export * as actionCreators from './action-creators/authPageState';
+export * as authStateActionCreators from './action-creators/authPageState';
+export * as authActionCreators from './action-creators/auth';

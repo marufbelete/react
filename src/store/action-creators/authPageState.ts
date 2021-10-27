@@ -1,7 +1,7 @@
-import { ActionTypes } from '../action-types';
+import { AuthPageStateActionTypes } from '../action-types/authPageStateTypes';
 
 export const toggleAuthPageState = () => {
     return {
-        type : ActionTypes.AUTH_PAGE_STATE_TOGGLE
+        type : AuthPageStateActionTypes.AUTH_PAGE_STATE_TOGGLE
     }
 }
