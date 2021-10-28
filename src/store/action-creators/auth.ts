@@ -53,8 +53,11 @@ export const signIn = (email: string, password: string, callBack : () => void) =
                 { email, password }
             );
             
-            dispatch( signInSuccess(response.data) );
-            callBack();
+            if(response.status >= 200 && response.status < 300){
+                dispatch( signInSuccess(response.data) );
+                callBack();
+            }
+
         }
         catch (error: any) {
             dispatch( signInError(error.message) );
@@ -80,4 +83,11 @@ export const signInError = (error: string) => {
         type: AuthActionTypes.SIGN_IN_SUCCESS,
         payload: error
     };
+}
+
+
+export const signOut = () => {
+    return {
+        type : AuthActionTypes.SIGN_OUT,
+    }
 }

@@ -56,7 +56,7 @@ const Form = ( props : FormProps ) => {
             }
             
             {
-                props.loading ? <SwitchTextOne>I AM AJDA</SwitchTextOne> :
+                props.loading ? <SwitchTextOne>Loading ..... </SwitchTextOne> :
 
                 <AuthButton>
                     { props.isSignUp ? "Sign Up" : "Sign In" }

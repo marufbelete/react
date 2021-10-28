@@ -7,7 +7,5 @@ export enum AuthActionTypes {
     SIGN_IN_ERROR = "sign/in/error",
     SIGN_IN_SUCCESS = "sign/in/success",
 
-    SIGN_OUT_LOADING = "sign/out",
-    SIGN_OUT_ERROR = "sign/out/error",
-    SIGN_OUT_SUCCESS = "sign/in/success",
+    SIGN_OUT = "sign/out",
 }

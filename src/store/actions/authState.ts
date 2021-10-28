@@ -28,6 +28,9 @@ export interface AuthSignInFailure {
     payload: string
 }
 
+export interface AuthSignOut {
+    type : AuthActionTypes.SIGN_OUT
+}
 
 export type Action =
     | AuthSignUpLoading
@@ -36,3 +39,4 @@ export type Action =
     | AuthSignInLoading
     | AuthSignInSuccess
     | AuthSignInFailure
+    | AuthSignOut

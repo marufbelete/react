@@ -42,6 +42,13 @@ const authPageStateReducer = (state : State = initialState , action : Action) : 
                 error : action.payload
             }
         
+        case AuthActionTypes.SIGN_OUT:
+            return {
+                auth : null,
+                loading : false,
+                error : null
+            }
+
         default : 
             return state;
     }
