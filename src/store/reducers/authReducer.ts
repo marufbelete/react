@@ -1,4 +1,5 @@
 import { AuthActionTypes } from '../action-types/authTypes';
+import { Action } from '../actions/authState';
 
 interface State {
     auth : string | null,
@@ -13,10 +14,12 @@ const initialState  = {
 }
 
 
-const authPageStateReducer = (state : State = initialState , action : any) : State => {    
+const authPageStateReducer = (state : State = initialState , action : Action) : State => {  
+    
     switch(action.type){
 
         case AuthActionTypes.SIGN_UP_SUCCESS:
+        case AuthActionTypes.SIGN_IN_SUCCESS:
             return {
                 auth : action.payload,
                 loading : false,
@@ -24,6 +27,7 @@ const authPageStateReducer = (state : State = initialState , action : any) : Sta
             }
 
         case AuthActionTypes.SIGN_UP_LOADING:
+        case AuthActionTypes.SIGN_IN_LOADING:
             return {
                 auth : null,
                 loading : true,
@@ -31,12 +35,13 @@ const authPageStateReducer = (state : State = initialState , action : any) : Sta
             }
 
         case AuthActionTypes.SIGN_UP_ERROR:
+        case AuthActionTypes.SIGN_IN_ERROR:
             return {
                 auth : null,
                 loading : false,
                 error : action.payload
             }
-
+        
         default : 
             return state;
     }

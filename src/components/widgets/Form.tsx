@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AuthButton, FormElement } from '../styled-components/AuthPageStyledComponents';
+import { AuthButton, FormElement, SwitchTextOne } from '../styled-components/AuthPageStyledComponents';
 import Input from './Input';
 
 
@@ -56,7 +56,7 @@ const Form = ( props : FormProps ) => {
             }
             
             {
-                props.loading ? <h1>I AM LOADING</h1> : 
+                props.loading ? <SwitchTextOne>I AM AJDA</SwitchTextOne> :
 
                 <AuthButton>
                     { props.isSignUp ? "Sign Up" : "Sign In" }

@@ -11,8 +11,8 @@ interface SwitchTextProps {
 const SwitchText = ({ isSignUp, onClick } : SwitchTextProps) => {
     return (
         <SwitchTextWrapper onClick = { onClick }>
-            <SwitchTextOne>{ !isSignUp ? "Already Have An Account ? " : "Don't Have An Account ? "}</SwitchTextOne>
-            <SwitchTextTwo>{ !isSignUp ? "Sign In" : "Sign Up"}</SwitchTextTwo>
+            <SwitchTextOne>{ isSignUp ? "Already Have An Account ? " : "Don't Have An Account ? "}</SwitchTextOne>
+            <SwitchTextTwo>{ isSignUp ? "Sign In" : "Sign Up"}</SwitchTextTwo>
         </SwitchTextWrapper>
     ) 
 };

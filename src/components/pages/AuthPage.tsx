@@ -3,11 +3,10 @@ import Form from '../widgets/Form';
 import { UserInputValues } from '../widgets/Form';
 import AuthPageHeader from '../widgets/AuthPageHeader';
 import SwitchText from '../widgets/SwitchText';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { authStateActionCreators, authActionCreators } from '../../store';
-
+import { SwitchTextOne } from '../styled-components/AuthPageStyledComponents';
 
 const AuthPage = () => {
 
@@ -23,12 +22,22 @@ const AuthPage = () => {
         if(authPageState!.isSignUp){
             dispatch(authActionCreators.signUp(values.email, values.password));
 
+            console.log(auth + " : " + error);
+            
             if(auth != null){
-                history.push('/private');
+                // history.push('/private');
             }
         }
         else {
-            console.log(values);
+
+            dispatch(authActionCreators.signIn(values.email, values.password));
+
+            console.log(auth + " : " + error);
+
+            if (auth != null) {
+                // history.push('/private');
+
+            }
         }
     }
 
@@ -44,6 +53,7 @@ const AuthPage = () => {
                 onSubmit= { onSubmit }
                 loading = { loading }
             />
+            <SwitchTextOne>{ auth }</SwitchTextOne>
             <SwitchText 
                 onClick = { handleAuthPageStateChange } 
                 isSignUp = { authPageState!.isSignUp }

@@ -1,4 +1,4 @@
-import { AuthStateToggleAction } from '../actions/authStatePage';
+import { AuthStateToggleAction } from '../actions/authPageState';
 import { AuthPageStateActionTypes } from '../action-types/authPageStateTypes';
 
 interface State {
@@ -8,7 +8,6 @@ interface State {
 const initialState  = {
     isSignUp : true
 }
-
 
 const authPageStateReducer = (state : State = initialState , action : AuthStateToggleAction) : State => {    
     switch(action.type){
