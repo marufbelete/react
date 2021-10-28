@@ -108,3 +108,10 @@ export const SwitchTextWrapper = styled.div`
     align-items : center;
     cursor : pointer;
 `;
+
+export const AuthError = styled.div`
+    text-align : center;
+    font-size : 15px;
+    margin-bottom : 25px;
+    color : red;
+`;

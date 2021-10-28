@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Form from '../widgets/Form';
 import { UserInputValues } from '../widgets/Form';
 import AuthPageHeader from '../widgets/AuthPageHeader';
@@ -6,39 +6,55 @@ import SwitchText from '../widgets/SwitchText';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { authStateActionCreators, authActionCreators } from '../../store';
-import { SwitchTextOne } from '../styled-components/AuthPageStyledComponents';
+import { AuthError } from '../styled-components/AuthPageStyledComponents';
 
 const AuthPage = () => {
 
     const history = useHistory();
     const dispatch = useDispatch();
     const authPageState = useSelector((state : any) => state.authPageState);
-    const { error, loading, auth } = useSelector((state : any) => state.auth);
+    const { error, loading } = useSelector((state : any) => state.auth);
+
+    const [authError, setAuthError] = useState("");
 
 
-    const onSubmit = (e : React.FormEvent<HTMLFormElement>, values : UserInputValues ) => {
+    console.log(error);
+    
+
+    const onSubmit = async (e : React.FormEvent<HTMLFormElement>, values : UserInputValues ) => {
         e.preventDefault();
 
-        if(authPageState!.isSignUp){
-            dispatch(authActionCreators.signUp(values.email, values.password));
-
-            console.log(auth + " : " + error);
-            
-            if(auth != null){
-                // history.push('/private');
-            }
+        if(values.password.length === 0 || values.email.length === 0 ){
+            setAuthError("Empty Fields");       
         }
+
         else {
-
-            dispatch(authActionCreators.signIn(values.email, values.password));
-
-            console.log(auth + " : " + error);
-
-            if (auth != null) {
-                // history.push('/private');
-
+            if(authPageState!.isSignUp) {
+                if(values.password === values.passwordRepeat || values.passwordRepeat!.length > 0 ){
+                    setAuthError("");
+                    await dispatch(
+                        authActionCreators.signUp(
+                            values.email, 
+                            values.password,
+                            () => { history.push('/private')}
+                        )
+                    );
+                }
+                else {
+                    setAuthError("Password Don't Match");
+                }
             }
-        }
+            else {
+                setAuthError("");
+                await dispatch(
+                    authActionCreators.signIn(
+                        values.email, 
+                        values.password,
+                        () => { history.push('/private')}
+                    )
+                );
+            }
+        }   
     }
 
     const handleAuthPageStateChange = () => {
@@ -53,7 +69,9 @@ const AuthPage = () => {
                 onSubmit= { onSubmit }
                 loading = { loading }
             />
-            <SwitchTextOne>{ auth }</SwitchTextOne>
+
+            <AuthError> { authError ?? error } </AuthError>
+
             <SwitchText 
                 onClick = { handleAuthPageStateChange } 
                 isSignUp = { authPageState!.isSignUp }

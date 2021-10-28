@@ -9,8 +9,8 @@ export const MainPageHeader = styled.div`
 `;
 
 export const MainPageContent = styled.div`
-    width : 800px;
-    height : 800px;
+    width : 450px;
+    height : 450px;
     background : #161515;
     margin : 50px auto;
     border-radius : 50px;
@@ -24,7 +24,7 @@ export const MainPageDescription = styled.div`
     width : 80%;
     line-height : 50px;
     color : lightgray;
-    font-size : 22px;
+    font-size : 20px;
 `;
 
 

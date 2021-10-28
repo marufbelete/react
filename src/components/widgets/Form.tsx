@@ -31,7 +31,7 @@ const Form = ( props : FormProps ) => {
             <Input 
                 labelText="Email*" 
                 placeholder = "Enter Your Email" 
-                error = "Bad Email" 
+                error = "" 
                 type="email"
                 onInputChange = { (value) => setEmail(value) }
             />

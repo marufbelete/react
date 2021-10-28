@@ -1,28 +1,25 @@
 import { Dispatch } from 'react';
 import  { AuthActionTypes }  from '../action-types/authTypes';
+import axios from 'axios';
 
-export const signUp = (email : string, password : string) => {
+export const signUp = (email : string, password : string , callBack : () => void) => {
+
     return async (dispatch : Dispatch<any>) => {
 
         dispatch( signUpLoading() )
 
         try {
-            const data = await getDummyToken();
-            dispatch( signUpSuccess(data) )
+            const response = await axios.post(
+                'http://localhost:5000/api/users',
+                { email, password }
+            );            
+            dispatch( signUpSuccess(response.data) );
+            callBack();
         } 
         catch (error : any) {
             dispatch( signUpError(error.message) );
         }
     }
-}
-
-
-const getDummyToken = async () => {
-    return "dad"
-}
-
-const getErrorDummyToken = async () => {
-    throw new Error("Failed Auth");
 }
 
 export const signUpSuccess = (token : string) => {
@@ -45,14 +42,19 @@ export const signUpError = (error : string) => {
     }
 }
 
-export const signIn = (email: string, password: string) => {
+export const signIn = (email: string, password: string, callBack : () => void) => {
     return async (dispatch: Dispatch<any>) => {
 
         dispatch( signInLoading() );
 
         try {
-            const token = await getErrorDummyToken();
-            dispatch( signInSuccess(token) )
+            const response = await axios.post(
+                'http://localhost:5000/api/auth',
+                { email, password }
+            );
+            
+            dispatch( signInSuccess(response.data) );
+            callBack();
         }
         catch (error: any) {
             dispatch( signInError(error.message) );
