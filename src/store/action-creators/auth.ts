@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 import  { AuthActionTypes }  from '../action-types/authTypes';
 import axios from 'axios';
 
-export const signUp = (email : string, password : string , callBack : () => void) => {
+export const signUp = (username : string, password : string, name: string, callBack : (token : string) => void) => {
 
     return async (dispatch : Dispatch<any>) => {
 
@@ -10,11 +10,11 @@ export const signUp = (email : string, password : string , callBack : () => void
 
         try {
             const response = await axios.post(
-                'http://localhost:5000/api/users',
-                { email, password }
+                'http://localhost:5000/register',
+                { username, password, name }
             );            
-            dispatch( signUpSuccess(response.data) );
-            callBack();
+            await dispatch( signUpSuccess(response.data) );
+            await callBack(response.data.token);
         } 
         catch (error : any) {
             dispatch( signUpError(error.message) );
@@ -42,20 +42,20 @@ export const signUpError = (error : string) => {
     }
 }
 
-export const signIn = (email: string, password: string, callBack : () => void) => {
+export const signIn = (username: string, password: string, callBack : (token : string) => void) => {
     return async (dispatch: Dispatch<any>) => {
 
         dispatch( signInLoading() );
 
         try {
             const response = await axios.post(
-                'http://localhost:5000/api/auth',
-                { email, password }
+                'http://localhost:5000/login',
+                { username, password }
             );
             
             if(response.status >= 200 && response.status < 300){
-                dispatch( signInSuccess(response.data) );
-                callBack();
+                await dispatch( signInSuccess(response.data) );
+                await callBack(response.data.token);
             }
 
         }

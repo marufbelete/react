@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
-import Form from '../widgets/Form';
-import { UserInputValues } from '../widgets/Form';
+import LoginForm from '../widgets/LoginForm';
+import { UserInputValues } from '../widgets/LoginForm';
 import AuthPageHeader from '../widgets/AuthPageHeader';
 import SwitchText from '../widgets/SwitchText';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ const AuthPage = () => {
     const onSubmit = async (e : React.FormEvent<HTMLFormElement>, values : UserInputValues ) => {
         e.preventDefault();
 
-        if(values.password.length === 0 || values.email.length === 0 ){
+        if(values.password.length === 0 || values.username.length === 0 ){
             setAuthError("Empty Fields");       
         }
 
@@ -34,9 +34,13 @@ const AuthPage = () => {
                     setAuthError("");
                     await dispatch(
                         authActionCreators.signUp(
-                            values.email, 
+                            values.username, 
                             values.password,
-                            () => { history.push('/private')}
+                            values.name,
+                            (token : string) => { 
+                                localStorage.setItem('token', token);
+                                history.push('/posts');
+                            }
                         )
                     );
                 }
@@ -48,9 +52,12 @@ const AuthPage = () => {
                 setAuthError("");
                 await dispatch(
                     authActionCreators.signIn(
-                        values.email, 
+                        values.username, 
                         values.password,
-                        () => { history.push('/private')}
+                        (token : string) => { 
+                            localStorage.setItem('token', token);
+                            history.push('/posts');
+                        }
                     )
                 );
             }
@@ -64,7 +71,7 @@ const AuthPage = () => {
     return (
         <Fragment>
             <AuthPageHeader isSignUp = { authPageState!.isSignUp }/>
-            <Form 
+            <LoginForm 
                 isSignUp= { authPageState!.isSignUp } 
                 onSubmit= { onSubmit }
                 loading = { loading }

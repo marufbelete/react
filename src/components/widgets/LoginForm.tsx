@@ -4,36 +4,50 @@ import Input from './Input';
 
 
 export interface UserInputValues {
-    email : string,
+    username : string,
     password : string,
-    passwordRepeat? : string
+    passwordRepeat? : string,
+    name: string
 }
 
-interface FormProps {
+interface LoginFormProps {
     isSignUp : boolean,
     onSubmit : (e : React.FormEvent<HTMLFormElement> , values : UserInputValues ) => void,
     loading : boolean
 }
 
-const Form = ( props : FormProps ) => {
+const LoginForm = ( props : LoginFormProps ) => {
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordRepeat, setPasswordRepeat] = useState("");
+    const [name, setName] = useState("");
 
 
     const values = {
-        email, password, passwordRepeat
+        username, password, name, passwordRepeat,
     }
 
     return (
         <FormElement isSignUp = { props.isSignUp } onSubmit = { (e) => props.onSubmit(e,values) }>
+            
+            {
+                props.isSignUp && 
+                <Input 
+                    labelText="Name*" 
+                    placeholder = "Enter Your Name" 
+                    error = "" 
+                    type="text"
+                    onInputChange = { (value) => setName(value) }
+                />  
+            }
+            
             <Input 
-                labelText="Email*" 
-                placeholder = "Enter Your Email" 
+                labelText="Username*" 
+                placeholder = "Enter Your Username" 
                 error = "" 
-                type="email"
-                onInputChange = { (value) => setEmail(value) }
+                type="text"
+                onInputChange = { (value) => setUsername(value) }
             />
 
            <Input 
@@ -71,4 +85,4 @@ const Form = ( props : FormProps ) => {
 }
 
 
-export default Form;
+export default LoginForm;

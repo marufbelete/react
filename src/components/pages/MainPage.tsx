@@ -32,7 +32,10 @@ const MainPage = () => {
                     nulla fringilla ullamcorper. Proin in est metus. 
                     Morbi porta eros malesuada risus eleifend, id feugiat 
                 </MainPageDescription>
-                <LogOutButton onClick = { () => dispatch(authActionCreators.signOut()) } >Log Out</LogOutButton>
+                <LogOutButton onClick = { () => {
+                    localStorage.removeItem("token");
+                    dispatch(authActionCreators.signOut());
+                } } >Log Out</LogOutButton>
             </MainPageContent>
         </Fragment>
     )

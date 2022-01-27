@@ -29,7 +29,8 @@ export const MainPageDescription = styled.div`
 
 
 export const LogOutButton = styled.button`
-  width: 80%;
+  width: 25%;
+  margin: 0 auto;
   height: 50px;
   font-size: 23px;
   background: #bc1bc5;
